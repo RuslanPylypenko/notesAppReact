@@ -1,5 +1,3 @@
-// @ts-ignore
-
 import React from "react";
 import {NoteType} from "../../store/notes";
 import {CATEGORY_ICONS} from "../../store/constants";
