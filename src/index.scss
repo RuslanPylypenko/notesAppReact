@@ -1,4 +1,5 @@
 @import "~bootstrap/scss/bootstrap";
+@import "~font-awesome/scss/font-awesome";
 
 body {
   margin: 0;
@@ -9,7 +10,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+.table .thead-dark th {
+  color: #fff;
+  background-color: #5c5e60;
+  border-color: #5c5e60;
+}
+.table .thead-dark th .btn{
+  color: #fff;
+}
+
+.table > thead,
+.table > tbody {
+  vertical-align: middle;
 }
