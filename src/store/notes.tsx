@@ -1,4 +1,6 @@
-export const notesList: NoteType[] = [
+import {INote} from "../interfaces";
+
+export const notesList: INote[] = [
     {
         id: '2hbv13k',
         name: 'My favorite note',
@@ -72,14 +74,4 @@ export const notesList: NoteType[] = [
         status: 'archived'
     },
 ]
-
-export type NoteType = {
-    id: string,
-    name: string,
-    created_at: string,
-    content: string,
-    dates: string[] | null,
-    category: string,
-    status: string
-}
 

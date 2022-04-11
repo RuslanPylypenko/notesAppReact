@@ -1,10 +1,8 @@
 import React from "react";
-import {NoteType} from "../../store/notes";
 import {CATEGORY_ICONS} from "../../store/constants";
+import {NoteListPropsType} from "../../interfaces";
 
-type NoteListPropsType = {
-    notes: NoteType[]
-}
+
 
 export const NotesTable: React.FC<NoteListPropsType> = ({notes}) => {
 

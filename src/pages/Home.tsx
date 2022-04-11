@@ -17,7 +17,7 @@ export const Home: React.FC = () => {
                <NoteForm />
             </div>
 
-            <SummaryTable />
+            <SummaryTable notes={notes} />
         </div>
     )
 }

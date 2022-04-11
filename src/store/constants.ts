@@ -1,4 +1,6 @@
-export const CATEGORY_ICONS: CATEGORY_ICON[] = [
+import {ICATEGORY_ICON} from "../interfaces";
+
+export const CATEGORY_ICONS: ICATEGORY_ICON[] = [
     {
         name: 'Random Thought',
         icon: 'random'
@@ -17,7 +19,9 @@ export const CATEGORY_ICONS: CATEGORY_ICON[] = [
     },
 ]
 
-export type CATEGORY_ICON = {
-    name: string,
-    icon: string,
+export const CATEGORIES: string[] = ['Random Thought', 'Idea', 'Quote', 'Task']
+
+export const STATUS = {
+    ACTIVE: 'active',
+    ARCHIVED: 'archived'
 }
