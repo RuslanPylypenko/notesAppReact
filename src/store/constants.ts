@@ -1,6 +1,6 @@
-import {ICATEGORY_ICON} from "../interfaces";
+import {I_CATEGORY_ICON} from "../interfaces";
 
-export const CATEGORY_ICONS: ICATEGORY_ICON[] = [
+export const CATEGORY_ICONS: I_CATEGORY_ICON[] = [
     {
         name: 'Random Thought',
         icon: 'random'

@@ -1,9 +1,13 @@
 import React from "react";
 import {CATEGORY_ICONS} from "../../store/constants";
 import {INote, NoteListPropsType} from "../../interfaces";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {useActions} from "../../hooks/useActions";
 
 
-export const NotesTable: React.FC<NoteListPropsType> = ({notes}) => {
+export const NotesTable: React.FC<NoteListPropsType> = () => {
+    const notes = useTypedSelector(state => state.notes)
+    const {deleteNoteAction} = useActions()
 
     const getIcon = (category: string): string => {
         const idx = CATEGORY_ICONS.findIndex(i => i.name === category)
@@ -15,8 +19,9 @@ export const NotesTable: React.FC<NoteListPropsType> = ({notes}) => {
         console.log('toggleStatusHandler')
     }
 
-    const removeNoteHandler = (e: React.MouseEvent<HTMLButtonElement>, noteId: string): void => {
-        console.log(e)
+    const removeNoteHandler = (e: React.MouseEvent<HTMLButtonElement>, note: INote): void => {
+        deleteNoteAction(note)
+        console.log(notes)
         console.log('removeNoteHandler')
     }
 
@@ -79,7 +84,7 @@ export const NotesTable: React.FC<NoteListPropsType> = ({notes}) => {
                                         className="btn btn-default fa fa-archive">
                                 </button>
                                 <button type="button"
-                                        onClick={(e) => removeNoteHandler(e, note.id)}
+                                        onClick={(e) => removeNoteHandler(e, note)}
                                         className="btn btn-default fa fa-trash">
                                 </button>
                             </div>
