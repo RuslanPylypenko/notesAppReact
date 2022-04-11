@@ -1,14 +1,36 @@
 import React from "react";
 import {CATEGORY_ICONS} from "../../store/constants";
-import {NoteListPropsType} from "../../interfaces";
-
+import {INote, NoteListPropsType} from "../../interfaces";
 
 
 export const NotesTable: React.FC<NoteListPropsType> = ({notes}) => {
 
-    const getIcon = (category: string):string => {
+    const getIcon = (category: string): string => {
         const idx = CATEGORY_ICONS.findIndex(i => i.name === category)
         return CATEGORY_ICONS[idx].icon
+    }
+
+    const toggleNoteStatusHandler = (e: React.MouseEvent<HTMLButtonElement>, noteId: string): void => {
+        console.log(e)
+        console.log('toggleStatusHandler')
+    }
+
+    const removeNoteHandler = (e: React.MouseEvent<HTMLButtonElement>, noteId: string): void => {
+        console.log(e)
+        console.log('removeNoteHandler')
+    }
+
+    const setFormDataHandler = (e: React.MouseEvent<HTMLButtonElement>, note: INote): void => {
+        console.log(e)
+        console.log('toggleStatusHandler')
+    }
+
+    const toggleTableHandler = (e: React.MouseEvent<HTMLButtonElement>): void  => {
+        console.log('toggleTableHandler')
+    }
+
+    function removeAllNotesHandler(e: React.MouseEvent<HTMLButtonElement>) {
+        console.log('toggleTableHandler')
     }
 
     return (
@@ -23,11 +45,13 @@ export const NotesTable: React.FC<NoteListPropsType> = ({notes}) => {
                 <th>Dates</th>
                 <th>
                     <div className="btn-group">
-                        <button type="button" className="btn btn-default">
-                            <i className="fa fa-archive"></i>
+                        <button type="button"
+                                onClick={(e) => toggleTableHandler(e)}
+                                className="btn btn-default fa fa-archive">
                         </button>
-                        <button type="button" className="btn btn-default">
-                            <i className="fa fa-trash"></i>
+                        <button type="button"
+                                onClick={(e) => removeAllNotesHandler(e)}
+                                className="btn btn-default fa fa-trash">
                         </button>
                     </div>
                 </th>
@@ -46,14 +70,17 @@ export const NotesTable: React.FC<NoteListPropsType> = ({notes}) => {
                         <td></td>
                         <td>
                             <div className="btn-group">
-                                <button type="button" className="btn btn-default">
-                                    <i className="fa fa-pencil"></i>
+                                <button type="button"
+                                        onClick={(e) => setFormDataHandler(e, note)}
+                                        className="btn btn-default fa fa-pencil">
                                 </button>
-                                <button type="button" className="btn btn-default">
-                                    <i className="fa fa-archive"></i>
+                                <button type="button"
+                                        onClick={(e) => toggleNoteStatusHandler(e, note.id)}
+                                        className="btn btn-default fa fa-archive">
                                 </button>
-                                <button type="button" className="btn btn-default">
-                                    <i className="fa fa-trash"></i>
+                                <button type="button"
+                                        onClick={(e) => removeNoteHandler(e, note.id)}
+                                        className="btn btn-default fa fa-trash">
                                 </button>
                             </div>
                         </td>
