@@ -1,5 +1,3 @@
-import {finished} from "stream";
-
 export interface I_CATEGORY_ICON {
     name: string,
     icon: string,
@@ -15,7 +13,7 @@ export interface INote {
     status: string
 }
 
-export interface ICreateNote{
+export interface ICreateNote {
     name: string,
     content: string,
     category: string,
@@ -30,47 +28,24 @@ export interface ISummary {
 
 export type NoteListPropsType = {
     notes: INote[],
-    showNotesStatus: string
+    showNotesStatus: string,
+    noteForEdit: INote|null
 }
 
-export enum NoteActionTypes{
+export enum NoteActionTypes {
     CREATE_NOTE = 'CREATE_NOTE',
-    EDIT_NOTE = 'EDIT_NOTE',
+    UPDATE_NOTE = 'UPDATE_NOTE',
     DELETE_NOTE = 'DELETE_NOTE',
-    SET_CURRENT_NOTE = 'SET_CURRENT_NOTE',
     TOGGLE_STATUS_NOTE = 'TOGGLE_STATUS_NOTE',
     TOGGLE_ALL_NOTES = 'TOGGLE_ALL_NOTES',
     DELETE_ALL_NOTES = 'DELETE_ALL_NOTES',
+    SET_NOTE_FOR_EDIT = 'SET_NOTE_FOR_EDIT',
 }
 
 
-interface AddNoteAction {
+interface INoteAction {
     type: string
     payload: INote
 }
 
-interface EditNoteAction {
-    type: string
-    payload: INote
-}
-
-interface SetCurrentNoteAction {
-    type: string
-    payload: INote
-}
-
-interface DeleteNoteAction {
-    type: string
-    payload: INote
-}
-
-export interface ToggleStatusNoteAction {
-    type: string
-    payload: INote
-}
-
-export type NoteAction = AddNoteAction |
-    EditNoteAction |
-    SetCurrentNoteAction |
-    DeleteNoteAction |
-    ToggleStatusNoteAction
+export type NoteAction = INoteAction

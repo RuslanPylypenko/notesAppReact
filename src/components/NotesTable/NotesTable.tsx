@@ -3,21 +3,17 @@ import {CATEGORY_ICONS} from "../../store/constants";
 import {INote} from "../../interfaces";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useActions} from "../../hooks/useActions";
+import {useForm} from "react-hook-form";
 
 
 export const NotesTable: React.FC = () => {
     const notes = useTypedSelector(state => state.notes)
     const showNotesStatus = useTypedSelector(state => state.showNotesStatus)
-    const {deleteNoteAction, toggleStatusNoteAction, toggleAllNotes, deleteAllNotes} = useActions()
+    const {deleteNoteAction, toggleStatusNoteAction, toggleAllNotes, deleteAllNotes, setNoteForEdit} = useActions()
 
     const getIcon = (category: string): string => {
         const idx = CATEGORY_ICONS.findIndex(i => i.name === category)
         return CATEGORY_ICONS[idx].icon
-    }
-
-    const setFormDataHandler = (e: React.MouseEvent<HTMLButtonElement>, note: INote): void => {
-        console.log(e)
-        console.log('toggleStatusHandler')
     }
 
     return (
@@ -54,11 +50,11 @@ export const NotesTable: React.FC = () => {
                         <td>{note.created_at}</td>
                         <td>{note.category}</td>
                         <td>{note.content}</td>
-                        <td></td>
+                        <td>{note.dates?.join(', ')}</td>
                         <td>
                             <div className="btn-group">
                                 <button type="button"
-                                        onClick={(e) => setFormDataHandler(e, note)}
+                                        onClick={() => setNoteForEdit(note)}
                                         className="btn btn-default fa fa-pencil">
                                 </button>
                                 <button type="button"

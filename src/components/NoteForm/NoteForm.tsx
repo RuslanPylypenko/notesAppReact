@@ -1,36 +1,55 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {CATEGORIES} from "../../store/constants";
 import {useForm} from "react-hook-form";
 import {useActions} from "../../hooks/useActions";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 interface IFormInputs {
-    id: null|String,
+    id: null | String,
     name: string,
-    category:string,
-    content:string
+    category: string,
+    content: string
 }
 
 export const NoteForm: React.FC = () => {
-    const {register, handleSubmit, formState: {errors}, getValues} = useForm<IFormInputs>()
-    const {createNote} = useActions()
+    const {register, handleSubmit, formState: {errors}, getValues, setValue, reset} = useForm<IFormInputs>()
+    const {createNote, updateNote} = useActions()
+    const {noteForEdit} = useTypedSelector(state => state)
+
+    useEffect(() => {
+        reset()
+        if (noteForEdit?.id) {
+            setValue('name', noteForEdit.name);
+            setValue('category', noteForEdit.category);
+            setValue('content', noteForEdit.content);
+        }
+    }, [noteForEdit, setValue])
 
     const formSubmitHandler = handleSubmit((data, e) => {
-        const id = getValues('id')
         const name = getValues('name')
         const category = getValues('category')
         const content = getValues('content')
 
-        createNote({
-            name,
-            category,
-            content
-        })
 
+        noteForEdit?.id
+            ? updateNote({
+                ...noteForEdit,
+                name,
+                category,
+                content
+            })
+            : createNote({
+                name,
+                category,
+                content
+            })
+
+        reset()
     })
+
 
     return (
         <form role="form" className="margin-bottom-0" onSubmit={formSubmitHandler}>
-            <input type="text" {...register('id')}/>
             <div className="form-row d-flex align-items-end">
                 <div className="form-group col-md-3">
                     <label>Name</label>

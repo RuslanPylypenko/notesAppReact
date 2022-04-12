@@ -76,5 +76,6 @@ export const initialState: NoteListPropsType = {
             status: 'archived'
         },
     ],
-    showNotesStatus: STATUS.ACTIVE
+    showNotesStatus: STATUS.ACTIVE,
+    noteForEdit: null
 }

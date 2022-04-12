@@ -19,3 +19,11 @@ export const deleteAllNotes = () => {
 export const createNote = (payload: ICreateNote) => {
     return {type: NoteActionTypes.CREATE_NOTE, payload}
 }
+
+export const updateNote = (payload: ICreateNote) => {
+    return {type: NoteActionTypes.UPDATE_NOTE, payload}
+}
+
+export const setNoteForEdit = (payload: ICreateNote) => {
+    return {type: NoteActionTypes.SET_NOTE_FOR_EDIT, payload}
+}

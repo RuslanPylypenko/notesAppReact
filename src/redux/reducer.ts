@@ -16,6 +16,13 @@ const createNote = (data: ICreateNote): INote => {
     }
 }
 
+const updateNote = (data: INote): INote => {
+    return {
+        ...data,
+        dates: dateParser(data.content)
+    }
+}
+
 export const reducer = (state = initialState, action: NoteAction): NoteListPropsType => {
     switch (action.type) {
         case NoteActionTypes.CREATE_NOTE:
@@ -23,9 +30,21 @@ export const reducer = (state = initialState, action: NoteAction): NoteListProps
                 ...state,
                 notes: [...state.notes, createNote(action.payload)]
             }
+        case NoteActionTypes.UPDATE_NOTE:
+            return {
+                ...state,
+                notes: state.notes.map(note => {
+                    if(note.id == action.payload.id){
+                        return updateNote(action.payload)
+                    }else {
+                        return note
+                    }
+                })
+            }
         case NoteActionTypes.DELETE_NOTE:
             return {
                 ...state,
+                noteForEdit: null,
                 notes: state.notes.filter(note => note.id !== action.payload.id)
             }
         case NoteActionTypes.TOGGLE_STATUS_NOTE:
@@ -47,7 +66,13 @@ export const reducer = (state = initialState, action: NoteAction): NoteListProps
         case NoteActionTypes.DELETE_ALL_NOTES:
             return {
                 ...state,
+                noteForEdit: null,
                 notes: []
+            }
+        case NoteActionTypes.SET_NOTE_FOR_EDIT:
+            return {
+                ...state,
+                noteForEdit: action.payload
             }
         default:
             return state;
