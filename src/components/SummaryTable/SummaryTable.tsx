@@ -2,6 +2,7 @@ import React from "react";
 import {ISummary} from "../../interfaces";
 import {CATEGORIES, CATEGORY_ICONS, STATUS} from "../../store/constants";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {getIcon} from "../../utils/getIcon";
 
 export const SummaryTable: React.FC = () => {
     const notes = useTypedSelector(state => state.notes)
@@ -11,11 +12,6 @@ export const SummaryTable: React.FC = () => {
         active: notes.filter(note => note.category === category && note.status === STATUS.ACTIVE).length,
         archived: notes.filter(note => note.category === category && note.status === STATUS.ARCHIVED).length,
     }))
-
-    const getIcon = (category: string):string => {
-        const idx = CATEGORY_ICONS.findIndex(i => i.name === category)
-        return CATEGORY_ICONS[idx].icon
-    }
 
     return (
         <table className="table">

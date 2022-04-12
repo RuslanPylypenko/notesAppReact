@@ -1,18 +1,13 @@
 import React from "react";
-import {CATEGORY_ICONS} from "../../store/constants";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useActions} from "../../hooks/useActions";
+import {getIcon} from "../../utils/getIcon";
 
 
 export const NotesTable: React.FC = () => {
     const notes = useTypedSelector(state => state.notes)
     const showNotesStatus = useTypedSelector(state => state.showNotesStatus)
     const {deleteNoteAction, toggleStatusNoteAction, toggleAllNotes, deleteAllNotes, setNoteForEdit} = useActions()
-
-    const getIcon = (category: string): string => {
-        const idx = CATEGORY_ICONS.findIndex(i => i.name === category)
-        return CATEGORY_ICONS[idx].icon
-    }
 
     return (
         <table className="table">
