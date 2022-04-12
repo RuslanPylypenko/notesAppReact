@@ -5,24 +5,14 @@ import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useActions} from "../../hooks/useActions";
 
 
-export const NotesTable: React.FC<NoteListPropsType> = () => {
+export const NotesTable: React.FC = () => {
     const notes = useTypedSelector(state => state.notes)
-    const {deleteNoteAction} = useActions()
+    const showNotesStatus = useTypedSelector(state => state.showNotesStatus)
+    const {deleteNoteAction, toggleStatusNoteAction} = useActions()
 
     const getIcon = (category: string): string => {
         const idx = CATEGORY_ICONS.findIndex(i => i.name === category)
         return CATEGORY_ICONS[idx].icon
-    }
-
-    const toggleNoteStatusHandler = (e: React.MouseEvent<HTMLButtonElement>, noteId: string): void => {
-        console.log(e)
-        console.log('toggleStatusHandler')
-    }
-
-    const removeNoteHandler = (e: React.MouseEvent<HTMLButtonElement>, note: INote): void => {
-        deleteNoteAction(note)
-        console.log(notes)
-        console.log('removeNoteHandler')
     }
 
     const setFormDataHandler = (e: React.MouseEvent<HTMLButtonElement>, note: INote): void => {
@@ -64,7 +54,7 @@ export const NotesTable: React.FC<NoteListPropsType> = () => {
             </thead>
             <tbody>
 
-            {notes.map((note, i) => {
+            {notes.filter(note => note.status === showNotesStatus).map((note, i) => {
                 return (
                     <tr key={i}>
                         <td><i className={"fa fa-2x fa-" + getIcon(note.category)}></i></td>
@@ -80,11 +70,11 @@ export const NotesTable: React.FC<NoteListPropsType> = () => {
                                         className="btn btn-default fa fa-pencil">
                                 </button>
                                 <button type="button"
-                                        onClick={(e) => toggleNoteStatusHandler(e, note.id)}
+                                        onClick={() => toggleStatusNoteAction(note)}
                                         className="btn btn-default fa fa-archive">
                                 </button>
                                 <button type="button"
-                                        onClick={(e) => removeNoteHandler(e, note)}
+                                        onClick={() => deleteNoteAction(note)}
                                         className="btn btn-default fa fa-trash">
                                 </button>
                             </div>

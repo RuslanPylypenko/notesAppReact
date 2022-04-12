@@ -1,8 +1,10 @@
 import React from "react";
-import {ISummary, NoteListPropsType} from "../../interfaces";
+import {ISummary} from "../../interfaces";
 import {CATEGORIES, CATEGORY_ICONS, STATUS} from "../../store/constants";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
 
-export const SummaryTable: React.FC<NoteListPropsType> = ({notes}) => {
+export const SummaryTable: React.FC = () => {
+    const notes = useTypedSelector(state => state.notes)
 
     const summary: ISummary[] = CATEGORIES.map(category => ({
         category,

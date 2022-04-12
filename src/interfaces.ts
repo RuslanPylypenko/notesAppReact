@@ -23,7 +23,8 @@ export interface ISummary {
 
 
 export type NoteListPropsType = {
-    notes: INote[]
+    notes: INote[],
+    showNotesStatus: string
 }
 
 export enum NoteActionTypes{

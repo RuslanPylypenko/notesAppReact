@@ -1,17 +1,22 @@
-import {notesList} from "../store/notes";
 import {NoteAction, NoteActionTypes, NoteListPropsType} from "../interfaces";
 import {STATUS} from "../store/constants";
-
-const initialState: NoteListPropsType = {notes: notesList};
+import {initialState} from "./db";
 
 export const reducer = (state = initialState, action: NoteAction): NoteListPropsType => {
     switch (action.type) {
         case NoteActionTypes.CREATE_NOTE:
-            return {notes: [...state.notes, action.payload]}
+            return {
+                ...state,
+                notes: [...state.notes, action.payload]
+            }
         case NoteActionTypes.DELETE_NOTE:
-            return {notes: state.notes.filter(note => note.id !== action.payload.id)}
+            return {
+                ...state,
+                notes: state.notes.filter(note => note.id !== action.payload.id)
+            }
         case NoteActionTypes.TOGGLE_STATUS_NOTE:
             return {
+                ...state,
                 notes: [
                     ...state.notes.filter(note => note.id !== action.payload.id),
                     {
