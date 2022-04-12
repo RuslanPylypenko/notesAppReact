@@ -25,6 +25,16 @@ export const reducer = (state = initialState, action: NoteAction): NoteListProps
                     }
                 ]
             }
+        case NoteActionTypes.TOGGLE_ALL_NOTES:
+            return {
+                ...state,
+                showNotesStatus: state.showNotesStatus === STATUS.ACTIVE ? STATUS.ARCHIVED : STATUS.ACTIVE
+            }
+        case NoteActionTypes.DELETE_ALL_NOTES:
+            return {
+                ...state,
+                notes: []
+            }
         default:
             return state;
     }
