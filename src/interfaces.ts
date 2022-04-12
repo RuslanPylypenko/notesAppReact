@@ -15,6 +15,12 @@ export interface INote {
     status: string
 }
 
+export interface ICreateNote{
+    name: string,
+    content: string,
+    category: string,
+}
+
 export interface ISummary {
     category: string,
     active: number,

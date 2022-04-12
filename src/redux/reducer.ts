@@ -1,13 +1,27 @@
-import {NoteAction, NoteActionTypes, NoteListPropsType} from "../interfaces";
+import {ICreateNote, INote, NoteAction, NoteActionTypes, NoteListPropsType} from "../interfaces";
 import {STATUS} from "../store/constants";
 import {initialState} from "./db";
+import {Id} from "../utils/generator";
+import moment from "moment";
+import {dateParser} from "../utils/dateParser";
+
+
+const createNote = (data: ICreateNote): INote => {
+    return {
+        ...data,
+        id: Id(),
+        created_at: moment().format('MMMM DD, YYYY'),
+        status: STATUS.ACTIVE,
+        dates: dateParser(data.content)
+    }
+}
 
 export const reducer = (state = initialState, action: NoteAction): NoteListPropsType => {
     switch (action.type) {
         case NoteActionTypes.CREATE_NOTE:
             return {
                 ...state,
-                notes: [...state.notes, action.payload]
+                notes: [...state.notes, createNote(action.payload)]
             }
         case NoteActionTypes.DELETE_NOTE:
             return {

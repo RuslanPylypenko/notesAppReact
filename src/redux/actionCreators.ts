@@ -1,4 +1,4 @@
-import {INote, NoteActionTypes} from "../interfaces";
+import {ICreateNote, INote, NoteActionTypes} from "../interfaces";
 
 export const deleteNoteAction = (payload: INote) => {
     return {type: NoteActionTypes.DELETE_NOTE, payload}
@@ -14,4 +14,8 @@ export const toggleAllNotes = () => {
 
 export const deleteAllNotes = () => {
     return {type: NoteActionTypes.DELETE_ALL_NOTES}
+}
+
+export const createNote = (payload: ICreateNote) => {
+    return {type: NoteActionTypes.CREATE_NOTE, payload}
 }
