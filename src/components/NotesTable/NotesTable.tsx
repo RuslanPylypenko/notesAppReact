@@ -1,9 +1,7 @@
 import React from "react";
 import {CATEGORY_ICONS} from "../../store/constants";
-import {INote} from "../../interfaces";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useActions} from "../../hooks/useActions";
-import {useForm} from "react-hook-form";
 
 
 export const NotesTable: React.FC = () => {

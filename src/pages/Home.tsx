@@ -1,10 +1,8 @@
-import React, {useState} from "react";
 import {NotesTable} from "../components/NotesTable/NotesTable";
 import {NoteForm} from "../components/NoteForm/NoteForm";
 import {SummaryTable} from "../components/SummaryTable/SummaryTable";
 
 export const Home: React.FC = () => {
-    const [notes] = useState()
 
     return (
         <div className="container pt-4">

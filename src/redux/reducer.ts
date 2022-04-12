@@ -34,7 +34,7 @@ export const reducer = (state = initialState, action: NoteAction): NoteListProps
             return {
                 ...state,
                 notes: state.notes.map(note => {
-                    if(note.id == action.payload.id){
+                    if(note.id === action.payload.id){
                         return updateNote(action.payload)
                     }else {
                         return note

@@ -23,7 +23,7 @@ export const NoteForm: React.FC = () => {
             setValue('category', noteForEdit.category);
             setValue('content', noteForEdit.content);
         }
-    }, [noteForEdit, setValue])
+    }, [noteForEdit, setValue, reset])
 
     const formSubmitHandler = handleSubmit((data, e) => {
         const name = getValues('name')
@@ -49,7 +49,7 @@ export const NoteForm: React.FC = () => {
 
 
     return (
-        <form role="form" className="margin-bottom-0" onSubmit={formSubmitHandler}>
+        <form className="margin-bottom-0" onSubmit={formSubmitHandler}>
             <div className="form-row d-flex align-items-end">
                 <div className="form-group col-md-3">
                     <label>Name</label>
