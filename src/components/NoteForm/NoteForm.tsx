@@ -50,36 +50,36 @@ export const NoteForm: React.FC = () => {
 
     return (
         <form className="margin-bottom-0" onSubmit={formSubmitHandler}>
-            <div className="form-row d-flex align-items-end">
+            <div className="form-row d-flex align-items-top">
                 <div className="form-group col-md-3">
                     <label>Name</label>
                     <input type="text"
-                           className="form-control"
+                           className={"form-control" + (errors.name ? " is-invalid" : "")}
                            {...register('name', {required: true})}
                     />
-                    {errors.name && "Name is required"}
+                    {errors.name && (<p className="text-danger">Name is required</p>)}
 
                 </div>
                 <div className="form-group col-md-3">
                     <label>Category:</label>
                     <div className="input-group">
                         <select  {...register('category', {required: true})}
-                                 className="form-control">
+                                 className={"form-control" + (errors.category ? " is-invalid" : "")}>
                             {CATEGORIES.map(category => (
                                 <option value={category} key={category}>{category}</option>
                             ))}
                         </select>
-                        {errors.category && "Category is required"}
+                        {errors.category && (<p className="text-danger">Category is required</p>)}
                     </div>
                 </div>
                 <div className="form-group col-md-4">
                     <label>Content</label>
                     <input type="text"
                            {...register('content', {required: true})}
-                           className="form-control"/>
-                    {errors.content && "Content is required"}
+                           className={"form-control" + (errors.content ? " is-invalid" : "")}/>
+                    {errors.content && (<p className="text-danger">Content is required</p>)}
                 </div>
-                <div className="form-group col-md-1">
+                <div className="form-group col-md-1 mt-4 pt-2">
                     <button type="submit" className="btn btn-light">Save</button>
                 </div>
             </div>
